@@ -51,6 +51,10 @@ const store = new Vuex.Store({
       );
     },
 
+    clear({ commit }) {
+      commit('addMedias', []);
+    },
+
     setSite({ commit }, { site }) {
       commit('setSite', site);
     },

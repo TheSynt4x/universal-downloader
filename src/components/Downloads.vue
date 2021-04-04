@@ -1,5 +1,16 @@
 <template>
   <v-container>
+    <span style="font-weight: bold;" class="headline">Media</span>
+    <v-btn
+      small
+      v-if="media && media.length > 0"
+      @click="$store.dispatch('clear')"
+      style="float: right;"
+      class="mb-5"
+      color="primary"
+      >clear</v-btn
+    >
+    <v-divider class="mt-2 mb-4"></v-divider>
     <v-expansion-panels v-if="media.length > 0">
       <v-expansion-panel v-for="link in media" :key="link.name">
         <v-expansion-panel-header

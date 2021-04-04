@@ -7,6 +7,12 @@ module.exports = {
       entry: './src/popup/main.js',
       title: 'Popup',
     },
+
+    options: {
+      template: 'public/options.html',
+      entry: './src/options/main.js',
+      title: 'Options',
+    },
   },
 
   pluginOptions: {
@@ -17,16 +23,12 @@ module.exports = {
         },
         contentScripts: {
           entries: {
-            'content-script': [
-              'src/content-script.js',
-            ],
+            'content-script': ['src/content-script.js'],
           },
         },
       },
     },
   },
 
-  transpileDependencies: [
-    'vuetify',
-  ],
+  transpileDependencies: ['vuetify'],
 };

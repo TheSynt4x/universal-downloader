@@ -19,13 +19,13 @@ const store = new Vuex.Store({
 
   mutations: {
     addMedia(state, media) {
-      state.media = { ...state.media, [media.url]: media };
+      state.media = { ...state.media, [media?.url]: media };
     },
 
     addMedias(state, medias) {
       const data = {};
       medias.forEach((m) => {
-        data[m.url] = m;
+        data[m?.url] = m;
       });
       state.media = data;
     },

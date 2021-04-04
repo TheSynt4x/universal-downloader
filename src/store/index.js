@@ -19,13 +19,13 @@ const store = new Vuex.Store({
 
   mutations: {
     addMedia(state, media) {
-      state.media = { ...state.media, [media.name]: media };
+      state.media = { ...state.media, [media.url]: media };
     },
 
     addMedias(state, medias) {
       const data = { ...state.media };
       medias.forEach((m) => {
-        data[m.name] = m;
+        data[m.url] = m;
       });
       state.media = medias;
     },
@@ -40,23 +40,14 @@ const store = new Vuex.Store({
       commit('addMedia', media);
     },
 
-    editMedia({ commit, getters }, { media, name }) {
-      commit(
-        'addMedias',
-        getters.media.map((m) => {
-          if (media.name === m.name) {
-            return { ...m, name: `${name}.mp3` };
-          }
-
-          return m;
-        }),
-      );
+    editMedia({ commit }, { media, name }) {
+      commit('addMedia', { ...media, name });
     },
 
     removeMedia({ commit, getters }, { media }) {
       commit(
         'addMedias',
-        getters.media.filter((m) => m.name !== media),
+        getters.media.filter((m) => m.url !== media),
       );
     },
 

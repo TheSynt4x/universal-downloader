@@ -7,22 +7,29 @@
     </v-app-bar>
 
     <v-main>
-      <download-component />
+      <downloads />
     </v-main>
+
+    <v-footer>
+      <v-spacer></v-spacer>
+      <v-btn text small href="options.html" target="_blank"
+        ><v-icon class="mr-2">mdi-cog</v-icon> settings</v-btn
+      >
+    </v-footer>
   </v-app>
 </template>
 
 <script>
-import DownloadComponent from '../components/DownloadComponent.vue';
+import Downloads from '../components/Downloads.vue';
 
 export default {
   name: 'App',
-  components: { DownloadComponent },
+  components: { Downloads },
 };
 </script>
 
 <style>
 html {
-  width: 400px;
+  width: 500px;
 }
 </style>

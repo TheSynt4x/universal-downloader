@@ -118,6 +118,7 @@ export default {
   props: {
     src: { type: String },
     randomName: { type: String },
+    ext: { type: String },
     trackTitle: { type: String },
     trackSubtitle: { type: String, default: undefined },
     allowPrevious: { type: Boolean, default: false },
@@ -155,7 +156,7 @@ export default {
 
         chrome.browserAction.setBadgeText({
           text:
-            this.$store.getters.media.length - 1 === 0
+            this.$store.getters.media.length - 1 === 0 || this.$store.getters.media.length === 0
               ? ''
               : `${this.$store.getters.media.length - 1}`,
         });
@@ -223,12 +224,12 @@ export default {
     download() {
       chrome.downloads.download({
         url: this.src,
-        filename: `music/${this.randomName}`,
+        filename: `music/${this.randomName}.${this.ext}`,
       });
 
       chrome.browserAction.setBadgeText({
         text:
-          this.$store.getters.media.length - 1 === 0
+          this.$store.getters.media.length - 1 === 0 || this.$store.getters.media.length === 0
             ? ''
             : `${this.$store.getters.media.length - 1}`,
       });

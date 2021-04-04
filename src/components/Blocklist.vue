@@ -62,7 +62,6 @@ export default {
     },
   },
   mounted() {
-    console.log(chrome.extension.getBackgroundPage());
     this.domains = chrome.extension.getBackgroundPage().settings.blocklist;
   },
 };

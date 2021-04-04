@@ -23,11 +23,11 @@ const store = new Vuex.Store({
     },
 
     addMedias(state, medias) {
-      const data = { ...state.media };
+      const data = {};
       medias.forEach((m) => {
         data[m.url] = m;
       });
-      state.media = medias;
+      state.media = data;
     },
 
     setSite(state, site) {

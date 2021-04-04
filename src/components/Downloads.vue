@@ -130,15 +130,12 @@ export default {
   },
   mounted() {
     chrome.extension.getBackgroundPage().initSettings();
-    console.log(chrome.extension.getBackgroundPage().settings.formats);
     const { formats } = chrome.extension.getBackgroundPage().settings;
 
     this.selected = Object.keys(formats)
       .filter((f) => formats[f] === true)
       .map((f) => this.formattedNames[f])
       .join(', ');
-
-    console.log(this.selected);
   },
 };
 </script>

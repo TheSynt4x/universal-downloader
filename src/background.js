@@ -11,18 +11,14 @@ function onInstall() {
 const settings = {};
 
 const initSettings = (listenToChanges = false) => {
-  chrome.storage.local.get(['blocklist', 'formats'], (result) => {
-    settings.blocklist = result.blocklist || [
-      'https://www.youtube.com',
-      'https://www.facebook.com',
-    ];
+  chrome.storage.local.get(['whitelist', 'formats'], (result) => {
+    settings.whitelist = result.whitelist || [];
 
     if (!result.formats) {
-      const data = {};
-      data.formats = { 'video/mp4': true, 'audio/mpeg': true };
-      chrome.storage.local.set(data, () => {});
+      const formats = { 'video/mp4': true, 'audio/mpeg': true };
 
-      settings.formats = data.formats;
+      chrome.storage.local.set(formats, () => {});
+      settings.formats = formats;
     } else {
       settings.formats = result.formats || {};
     }
@@ -45,7 +41,7 @@ const handleImages = (details) => {
 };
 
 const handleMedia = (details, storage) => {
-  if (storage.blocklist.includes(details.initiator)) return;
+  if (!storage.whitelist.includes(details.initiator)) return;
 
   const contentType = details?.responseHeaders.find((r) => r?.name.toLowerCase() === 'content-type')
     ?.value;

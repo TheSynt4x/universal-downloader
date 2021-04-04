@@ -4,16 +4,16 @@
 
     <v-card>
       <v-toolbar color="primary" dark
-        ><v-card-title><v-icon class="mr-2">mdi-cancel</v-icon> Blocklist</v-card-title></v-toolbar
+        ><v-card-title><v-icon class="mr-2">mdi-check</v-icon> Whitelist</v-card-title></v-toolbar
       >
       <v-card-text>
-        Enter domains here you wish not to receive files from.
+        Enter domains here you wish to receive files from.
         <v-list dense>
           <v-list-item class="pa-4" v-for="domain in domains" :key="domain">
             <v-list-item-title>{{ domain }}</v-list-item-title>
             <v-list-item-action>
               <v-spacer></v-spacer>
-              <v-icon @click="removeFromBlocklist(domain)">mdi-delete</v-icon>
+              <v-icon @click="remove(domain)">mdi-delete</v-icon>
             </v-list-item-action>
           </v-list-item>
 
@@ -21,7 +21,7 @@
 
           <v-list-item class="pa-0 ma-0 pt-5">
             <v-text-field v-model="domain" placeholder="Enter a domain"></v-text-field>
-            <v-btn class="ml-2" color="primary" @click="addBlocklist">Add</v-btn>
+            <v-btn class="ml-2" color="primary" @click="add">Add</v-btn>
           </v-list-item>
         </v-list>
       </v-card-text>
@@ -38,7 +38,7 @@ export default {
     error: null,
   }),
   methods: {
-    addBlocklist() {
+    add() {
       if (this.domains.includes(this.domain)) {
         this.error = 'Domain already exists';
         return;
@@ -46,23 +46,17 @@ export default {
 
       this.domains.push(this.domain);
 
-      const data = {};
-      data.blocklist = this.domains;
-
-      chrome.storage.local.set(data, () => {});
+      chrome.storage.local.set({ whitelist: this.domains }, () => {});
     },
 
-    removeFromBlocklist(domain) {
+    remove(domain) {
       this.domains = this.domains.filter((d) => d !== domain);
 
-      const data = {};
-      data.blocklist = this.domains;
-
-      chrome.storage.local.set(data, () => {});
+      chrome.storage.local.set({ whitelist: this.domains }, () => {});
     },
   },
   mounted() {
-    this.domains = chrome.extension.getBackgroundPage().settings.blocklist;
+    this.domains = chrome.extension.getBackgroundPage().settings.whitelist;
   },
 };
 </script>

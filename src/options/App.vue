@@ -8,7 +8,7 @@
 
     <v-main>
       <v-container style="max-width: 960px">
-        <blocklist />
+        <whitelist />
 
         <filetypes />
       </v-container>
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Blocklist from '../components/Blocklist.vue';
+import Whitelist from '../components/Whitelist.vue';
 import Filetypes from '../components/Filetypes.vue';
 
 export default {
-  components: { Blocklist, Filetypes },
+  components: { Whitelist, Filetypes },
 };
 </script>

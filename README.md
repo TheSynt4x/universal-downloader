@@ -36,16 +36,16 @@ Run the local development or production command and then load the unpacked exten
 ## The extension
 If you play an .mp3 file from a website, it will appear in the extension's popup. From there you can choose to rename, delete or download it. For audio files, there is support to preview the file. 
 
-**Preview support for anything other than .mp3 files does not yet exist.**
+**Preview support for anything other than .mp3 files does not exist yet.**
 
 ![extension](https://i.imgur.com/BRaUsPH.png)
 
 ## Configurations
-There is *some* configurability in this extension. You can add domains to a **blocklist** and files from those sites will not appear in the extension and will not be ready for download.
+There is *some* configurability in this extension. For files to appear in the extension popout, you must add a domain to the whitelist. Doing so, will only retrieve files from those sites. This is done to prevent files being retrieved from unwanted sites and so forth.
 
 You can also choose which formats you want to be able to download. There are only two options now but there will be more once support for them is added.
 
-![configurations](https://i.imgur.com/tyezz0W.png)
+![configurations](https://i.imgur.com/x1SukMR.png)
 
 ## License
 [MIT](license.md)

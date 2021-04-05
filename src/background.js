@@ -11,8 +11,13 @@ function onInstall() {
 const settings = {};
 
 const initSettings = (listenToChanges = false) => {
-  chrome.storage.local.get(['whitelist', 'formats'], (result) => {
+  chrome.storage.local.get(['whitelist', 'formats', 'enabled'], (result) => {
     settings.whitelist = result.whitelist || [];
+
+    if (!result.enabled || !!result.enabled) {
+      chrome.storage.local.set({ enabled: true }, () => {});
+      settings.enabled = result.enabled || false;
+    }
 
     if (!result.formats) {
       const formats = { 'video/mp4': true, 'audio/mpeg': true };
@@ -41,6 +46,8 @@ const handleImages = (details) => {
 };
 
 const handleMedia = (details, storage) => {
+  if (!settings.enabled) return;
+
   if (!storage.whitelist.includes(details.initiator)) return;
 
   const contentType = details?.responseHeaders.find((r) => r?.name.toLowerCase() === 'content-type')

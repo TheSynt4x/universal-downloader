@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <div>
     <span style="font-weight: bold;" class="headline">Media</span>
     <v-btn
       small
@@ -11,7 +11,7 @@
       >clear</v-btn
     >
     <v-divider class="mt-2 mb-4"></v-divider>
-    <v-expansion-panels v-if="media.length > 0">
+    <v-expansion-panels v-if="media && media.length > 0">
       <v-expansion-panel v-for="link in media" :key="link.name">
         <v-expansion-panel-header
           :expand-icon="link.type === 'mp3' ? 'mdi-menu-down' : ''"
@@ -59,7 +59,7 @@
     </v-expansion-panels>
 
     <v-alert v-else role="alert" type="info">
-      <span v-if="Object.keys(selected).length === 0"
+      <span v-if="selected && Object.keys(selected).length === 0"
         >Please go to settings and enable some formats you'd wish to save!</span
       >
 
@@ -79,7 +79,7 @@
         </v-card-actions>
       </v-card>
     </v-dialog>
-  </v-container>
+  </div>
 </template>
 
 <script>

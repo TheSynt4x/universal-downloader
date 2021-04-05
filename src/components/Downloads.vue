@@ -113,6 +113,7 @@ export default {
 
     change(m) {
       this.$store.dispatch('editMedia', { media: m, name: this.songName });
+      this.editDialog = false;
     },
 
     remove(m) {

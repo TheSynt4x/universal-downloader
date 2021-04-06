@@ -1,15 +1,7 @@
 <template>
   <div>
     <span style="font-weight: bold;" class="headline">Media</span>
-    <v-btn
-      small
-      v-if="media && media.length > 0"
-      @click="$store.dispatch('clear')"
-      style="float: right;"
-      class="mb-5"
-      color="primary"
-      >clear</v-btn
-    >
+    <v-btn small @click="clear()" style="float: right;" class="mb-5" color="primary">clear</v-btn>
     <v-divider class="mt-2 mb-4"></v-divider>
     <v-expansion-panels v-if="media && media.length > 0">
       <v-expansion-panel v-for="link in media" :key="link.name">
@@ -124,6 +116,11 @@ export default {
             ? ''
             : `${this.$store.getters.media.length - 1}`,
       });
+    },
+
+    clear() {
+      this.$store.dispatch('clear');
+      chrome.browserAction.setBadgeText({ text: '' });
     },
 
     download(link) {
